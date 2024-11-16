@@ -1,0 +1,11 @@
+# TypeScript specific
+*.tsbuildinfo
+
+# sonar output
+.scannerwork
+
+# SQLite files
+/src/database/sqlite/*
+
+# Contract adresses we want to scan through the blockchain
+src/contracts.json

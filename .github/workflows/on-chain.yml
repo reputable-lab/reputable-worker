@@ -1,0 +1,37 @@
+name: on-chain
+
+on: 
+  push:
+    paths:
+      - "packages/on-chain/**"
+      - ".github/workflows/on-chain.yml"
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm ci
+      working-directory: packages/on-chain
+
+    - name: Check code format
+      run: npm run check-format
+      working-directory: packages/on-chain
+
+    - name: Check type definitions
+      run: npm run check-types
+      working-directory: packages/on-chain
+    
+    - name: run tests
+      run: npm run test
+      working-directory: packages/on-chain
+

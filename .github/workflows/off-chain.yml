@@ -1,0 +1,42 @@
+name: off-chain
+
+on: 
+  push:
+    paths:
+      - "packages/off-chain/**"
+      - ".github/workflows/off-chain.yml"
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm ci
+      working-directory: packages/off-chain
+
+    - name: Check code format
+      run: npm run check-format
+      working-directory: packages/off-chain
+
+    - name: Check type definitions
+      run: npm run generate
+      working-directory: packages/data-warehouse
+
+    - name: Check type definitions
+      run: npm run check-types
+      working-directory: packages/off-chain
+
+    
+    - name: run tests
+      run: npm run test
+      working-directory: packages/off-chain
+

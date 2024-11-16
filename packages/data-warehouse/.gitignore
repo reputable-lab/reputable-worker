@@ -1,0 +1,7 @@
+# TypeScript specific
+*.tsbuildinfo
+
+# sonar output
+.scannerwork
+
+**/database/sqlite/**

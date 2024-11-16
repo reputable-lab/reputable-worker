@@ -1,0 +1,20 @@
+{
+  "name": "reputable",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start-all:dev": "cd packages/data-warehouse && npm run start:dev && cd ../off-chain && npm run start:dev && cd ../reputation-model && npm run start:dev",
+    "start-all:prod": "cd packages/data-warehouse && npm run start:prod && cd ../off-chain && npm run start:prod && cd ../reputation-model && npm run start:prod",
+    "clear-all:logs": "cd packages/api && npm run clear:logs && cd ../data-warehouse && npm run clear:logs && cd ../off-chain && npm run clear:logs && cd ../on-chain && npm run clear:logs && cd ../reputation-model && npm run clear:logs",
+    "db:generate": "cd packages/data-warehouse && npm run generate",
+    "api:build": "cd packages/api && npm run build",
+    "api:start": "cd packages/api && npm run start:prod"
+  },
+  "engines": {
+    "node": "^20",
+    "npm": "^10"
+  }
+}

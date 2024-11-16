@@ -1,0 +1,146 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Contributor {
+  contributorName     String                  @id
+  contributorWallet   String?
+  totalCommits        Int                     @default(0)
+  followersCount      Int                     @default(0)
+  lastRank            Int?                    @default(-1)
+  lastReputationScore Int?                    @default(0)
+  contributions       Contribution[]
+  reputationScores    ContributorReputation[]
+  attestation         Attestation?
+  createdAt           DateTime                @default(now())
+  updatedAt           DateTime                @updatedAt
+}
+
+model ContributorReputation {
+  contributorReputationId Int         @id @default(autoincrement())
+  rank                    Int?        @default(-1)
+  reputationScore         Int         @default(0)
+  contributorName         String
+  contributor             Contributor @relation(fields: [contributorName], references: [contributorName])
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
+}
+
+model Attestation {
+  id     Int    @id @default(autoincrement())
+  refUID String // bytes32 in Solidity
+
+  // OffchainAttestation fields
+  version        Int // uint16 in Solidity
+  attester       String // Ethereum address
+  schema         String // bytes32 in Solidity
+  recipient      String // Ethereum address
+  time           BigInt // uint64 in Solidity
+  expirationTime BigInt // uint64 in Solidity
+  revocable      Boolean
+  data           String // Custom attestation data
+  salt           String // bytes32 in Solidity
+
+  // Signature fields
+  signature String // bytes32 in Solidity
+
+  contributorName String      @unique
+  Contributor     Contributor @relation(fields: [contributorName], references: [contributorName])
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([refUID])
+}
+
+model Contribution {
+  contributionId              Int         @id @default(autoincrement())
+  commitsCount                Int         @default(0)
+  lastCommitTimestamp         Int // In seconds
+  contributorName             String
+  contributor                 Contributor @relation(fields: [contributorName], references: [contributorName])
+  repositoryId                Int
+  repository                  Repository  @relation(fields: [repositoryId], references: [repositoryId])
+  //FOR INTERNAL DASHBOARD
+  contributionReputationScore Int?
+  protocolName                String?
+  commitProportion            Float?
+  normalizedNumberOfTx        Float?
+  normalizedUniqueFromCount   Float?
+  normalizedTve               Float?
+  numberOfDevs                Int?
+  //FOR INTERNAL DASHBOARD
+  createdAt                   DateTime    @default(now())
+  updatedAt                   DateTime    @updatedAt
+
+  @@unique([contributorName, repositoryId])
+}
+
+model Organization {
+  organizationName       String                   @id
+  firstCommit            Int? // For the age of the organization
+  numberOfRepos          Int? // Number of repositories (only web3 repo, it could not correspond to repositories.length)
+  numberOfDevs           Int? // Number of developers (on web3 repo)
+  numberOfCommits        Int? // Number of commits (on web3 repo)
+  repositories           Repository[]
+  lastRank               Int?                     @default(-1)
+  lastReputationScore    Int?                     @default(0)
+  activeContributor      Int? // developpeurs ayant commit au moins 1 fois sur ces 3 derniers mois
+  newContributor         Int? // nouveau contributeur ayant commit dans cette orga pour la premiere fois dans les 30 deniers jours
+  uniqueContributor      Int? // contributeur ayant pas commit dans une autre oraganisation depuis 30J
+  OrganizationReputation OrganizationReputation[]
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+}
+
+model OrganizationReputation {
+  organizationReputationId Int          @id @default(autoincrement())
+  rank                     Int?         @default(-1)
+  reputationScore          Int          @default(0)
+  organizationName         String
+  organization             Organization @relation(fields: [organizationName], references: [organizationName])
+  createdAt                DateTime     @default(now())
+  updatedAt                DateTime     @updatedAt
+}
+
+model Repository {
+  repositoryId     Int            @id @default(autoincrement())
+  name             String
+  tags             String[]
+  firstCommits     Int? // For the age of the repository
+  organization     Organization?  @relation(fields: [organizationName], references: [organizationName])
+  organizationName String?
+  owner            String
+  totalCommits     Int            @default(0) // Total commits in this repository
+  contributions    Contribution[]
+  contracts        Contract[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([owner, name])
+}
+
+model Contract {
+  address             String      @id // Should be in lower case
+  creationBlockNumber Int
+  numberOfTx          Int         @default(0)
+  uniqueFromCount     Int         @default(0)
+  tve                 Decimal     @default(0.0)
+  repository          Repository? @relation(fields: [repositoryID], references: [repositoryId])
+  repositoryID        Int?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+}
+
+model CronRun {
+  id                 Int       @id @default(autoincrement())
+  cronType           String
+  startAt            DateTime  @default(now())
+  finishAt           DateTime?
+  lastBlockProcessed Int? // Only for on-chain jobs
+}

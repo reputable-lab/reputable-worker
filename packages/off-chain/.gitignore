@@ -1,0 +1,5 @@
+# TypeScript specific
+*.tsbuildinfo
+
+# sonar output
+.scannerwork

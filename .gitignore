@@ -1,0 +1,24 @@
+# IDE files
+/.vscode
+/.idea
+
+# Compiled output
+dist
+build
+
+# Dependency directories
+node_modules
+
+# Miscellaneous
+.DS_Store
+.env
+*.logs
+*.env
+**/off-chain/*.json
+**.env.dev
+**.env.prod
+
+# Ignore logs directory and its contents in any package
+**/logs/**
+packages/reputation-model/reputation_scores.csv
+packages/on-chain/src/database/sqlite-test

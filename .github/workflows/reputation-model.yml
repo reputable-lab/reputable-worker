@@ -1,0 +1,38 @@
+name: reputation-model
+
+on:
+  push:
+    paths:
+      - "packages/reputation-model/**"
+      - "!packages/reputation-model/src/ui/**"
+      - ".github/workflows/reputation-model.yml"
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm ci
+      working-directory: packages/reputation-model
+
+    - name: Check code format
+      run: npm run check-format
+      working-directory: packages/reputation-model
+
+    - name: Check type definitions
+      run: npm run check-types
+      working-directory: packages/reputation-model
+
+    - name: run tests
+      run: npm run test
+      working-directory: packages/reputation-model
+

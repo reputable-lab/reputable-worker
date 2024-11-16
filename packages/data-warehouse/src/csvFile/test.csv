@@ -1,0 +1,20 @@
+Protocol,Smart Contract Name,Repo Link,Category,Smart Contract Address
+Uniswap,Uniswap-V2,https://github.com/Uniswap/v2-core,DeFi;DEX,0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f
+,,https://github.com/Uniswap/v2-periphery/tree/master,DeFi;DEX,0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
+,Uniswap-UniswapV3Factory,https://github.com/Uniswap/uniswap-v3-core/blob/v1.0.0/contracts/UniswapV3Factory.sol,DeFi;DEX,0x1F98431c8aD98523631AE4a59f267346ea31F984
+,Uniswap-TickLens,https://github.com/Uniswap/uniswap-v3-periphery/blob/v1.0.0/contracts/lens/TickLens.sol,DeFi;DEX,0xbfd8137f7d1516D3ea5cA83523914859ec47F573
+,Uniswap-Quoter,https://github.com/Uniswap/uniswap-v3-periphery/blob/v1.0.0/contracts/lens/Quoter.sol,DeFi;DEX,0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6
+,Uniswap-SwapRouter,https://github.com/Uniswap/uniswap-v3-periphery/blob/v1.0.0/contracts/SwapRouter.sol,DeFi;DEX,0xE592427A0AEce92De3Edee1F18E0157C05861564
+,Uniswap-NFTDescriptor,https://github.com/Uniswap/uniswap-v3-periphery/blob/v1.0.0/contracts/libraries/NFTDescriptor.sol,DeFi;DEX,0x42B24A95702b9986e82d421cC3568932790A48Ec
+,Uniswap-NonfungibleTokenPositionDescriptor,https://github.com/Uniswap/uniswap-v3-periphery/blob/v1.0.0/contracts/NonfungibleTokenPositionDescriptor.sol,DeFi;DEX,0x91ae842A5Ffd8d12023116943e72A606179294f3
+,Uniswap-NonfungiblePositionManager,https://github.com/Uniswap/uniswap-v3-periphery/blob/v1.0.0/contracts/NonfungiblePositionManager.sol,DeFi;DEX,0xC36442b4a4522E871399CD717aBDD847Ab11FE88
+,Uniswap-V3Migrator,https://github.com/Uniswap/uniswap-v3-periphery/blob/v1.0.0/contracts/V3Migrator.sol,DeFi;DEX,0xA5644E29708357803b5A882D272c41cC0dF92B34
+MakerDAO,MakerDAO-CDP_MANAGER,https://github.com/makerdao/dss-cdp-manager,DeFi;Collateralized Debt Position (CDP),0x5ef30b9986345249bc32d8928B7ee64DE9435E39
+,MakerDAO-DSR_MANAGER,https://github.com/makerdao/dsr-manager,DeFi;Collateralized Debt Position (CDP),0x373238337Bfe1146fb49989fc222523f83081dDb
+,MakerDAO-LERP_FAB,https://github.com/makerdao/dss-lerp,DeFi;Collateralized Debt Position (CDP),0x9175561733D138326FDeA86CdFdF53e92b588276
+,MakerDAO-RWA015_A_INPUT_CONDUIT_JAR_USDC,https://github.com/makerdao/rwa-toolkit,DeFi;Collateralized Debt Position (CDP),0xB9373C557f3aE8cDdD068c1644ED226CfB18A997
+,MakerDAO-GET_CDPS,https://github.com/makerdao/dss-cdp-manager,DeFi;Collateralized Debt Position (CDP),0x36a724Bd100c39f0Ea4D3A20F7097eE01A8Ff573
+,MakerDAO-GOV_GUARD,https://github.com/makerdao/mkr-authority,DeFi;Collateralized Debt Position (CDP),0x6eEB68B2C7A918f36B78E2DB80dcF279236DDFb8
+,MakerDAO-ILK_REGISTRY,https://github.com/makerdao/ilk-registry,DeFi;Collateralized Debt Position (CDP),0x5a464C28D19848f44199D003BeF5ecc87d090F87
+,MakerDAO-RWA015_A_INPUT_CONDUIT_JAR_GUSD,https://github.com/makerdao/rwa-toolkit,DeFi;Collateralized Debt Position (CDP),0x13C31b41E671401c7BC2bbd44eF33B6E9eaa1E7F
+,MakerDAO-MCD_DAI,https://github.com/makerdao/dss,DeFi;Collateralized Debt Position (CDP),0x6B175474E89094C44Da98b954EedeAC495271d0F
